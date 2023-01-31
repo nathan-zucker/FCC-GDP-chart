@@ -4,7 +4,16 @@
   color: whitesmoke;
   overflow: hidden;
 }
+
+.App {
+  padding-top: 3rem;
+}
+
 #chart-container {
+  width: fit-content;
+  height: fit-content;
+  margin: 3rem auto;
+  padding: 1rem;
   border: 2px solid gray;
 }
 .bar:hover {
