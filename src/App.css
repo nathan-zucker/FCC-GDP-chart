@@ -1,0 +1,14 @@
+:root {
+  text-align: center;
+  background-color: #1a1a1a;
+  color: whitesmoke;
+}
+#chart-container {
+  border: 2px solid gray;
+}
+.bar:hover {
+  fill: cadetblue;
+}
+g {
+  color: gray;
+}
