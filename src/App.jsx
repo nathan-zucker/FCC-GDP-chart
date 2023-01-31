@@ -42,13 +42,13 @@ export function App() {
     d3.select("#tooltip")
     .attr("data-date", dataPoint[0])
     .transition()
-    .style("opacity", 0.8)
+    .style("opacity", 1)
     .text("DATE: "+dataPoint[0]+', GDP: '+dataPoint[1])
   }
   function mousemoveHandler(e) {
     d3.select("#tooltip")
-      .style("top", e.clientY+"px")
-      .style("left", e.clientX+"px")
+      .style("top", e.clientY-60+"px")
+      .style("left", e.clientX-170+"px")
   }
   function mouseoutHandler () {
     console.log("mouse out")
@@ -57,10 +57,6 @@ export function App() {
     .style("opacity", 0)
   }
 
-  const tooltip = d3.select(".App").append("div")
-    .style("position", "absolute")
-    .style("padding", "4px")
-    .style("border", "2px solid gray")
 
   function renderChart(json) {
 
