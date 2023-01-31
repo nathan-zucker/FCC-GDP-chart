@@ -2,6 +2,7 @@
   text-align: center;
   background-color: #1a1a1a;
   color: whitesmoke;
+  overflow: hidden;
 }
 #chart-container {
   border: 2px solid gray;
@@ -11,4 +12,13 @@
 }
 g {
   color: gray;
+}
+#tooltip {
+  background-color: #1a1a1a;
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden
+
 }

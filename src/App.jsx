@@ -36,6 +36,31 @@ export function App() {
     }
   },[])
 
+  function mouseoverHandler(d) {
+    console.log(d.clientX, d.clientY)
+    const dataPoint = d.toElement.__data__
+    d3.select("#tooltip")
+    .attr("data-date", dataPoint[0])
+    .transition()
+    .style("opacity", 0.8)
+    .text("DATE: "+dataPoint[0]+', GDP: '+dataPoint[1])
+  }
+  function mousemoveHandler(e) {
+    d3.select("#tooltip")
+      .style("top", e.clientY+"px")
+      .style("left", e.clientX+"px")
+  }
+  function mouseoutHandler () {
+    console.log("mouse out")
+    d3.select("#tooltip")
+    .transition()
+    .style("opacity", 0)
+  }
+
+  const tooltip = d3.select(".App").append("div")
+    .style("position", "absolute")
+    .style("padding", "4px")
+    .style("border", "2px solid gray")
 
   function renderChart(json) {
 
@@ -79,8 +104,11 @@ export function App() {
     .attr("x", (d, i)=> padding + i * rW)
     .attr("y", (d)=> h - yScale(d[1]))
     .attr("fill", "whitesmoke")
-    .append("title")
-    .text((d)=>"DATE: "+d[0]+", GDP: "+d[1]+"")
+    .on("mouseover", mouseoverHandler)
+    .on("mousemove", mousemoveHandler)
+    .on("mouseout", mouseoutHandler)
+    //.append("title")
+    //.text((d)=>"DATE: "+d[0]+", GDP: "+d[1]+"")
 
     console.log(parseInt(data[0][0]))
 
@@ -100,18 +128,7 @@ export function App() {
     .attr("transform", "translate(" + padding + ",0)")
       .call(yAxis)
 
-    const tooltip = d3.select("#chart-container")
-      .append("div")
-      .attr("id", "tooltip")
-      .style("position", "absolute")
-      .style("visibility", "hidden")
-      .style("background-color", "gray")
-      .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .html("<div><p>I am the tool tip</p></div>")
-  
+
   }
 
 
@@ -119,6 +136,7 @@ export function App() {
   return (
     <div className="App">
       <h1 id="title"></h1>
+      <div id="tooltip">tooltip</div>
       <div id="chart-container"></div>
       <div id="json"></div>
     </div>
