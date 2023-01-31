@@ -120,7 +120,7 @@ export function App() {
       <h1 id="title"></h1>
       <div id="tooltip">tooltip</div>
       <div id="chart-container"></div>
-      <div id="json"></div>
+      <footer><span style={{"color": "gray"}}>created by</span><br/>Nathan Zucker</footer>
     </div>
   )
 }
