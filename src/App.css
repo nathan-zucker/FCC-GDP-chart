@@ -15,9 +15,13 @@ g {
 }
 #tooltip {
   background-color: #1a1a1a;
-  width: 150px;
-  height: 50px;
+  width: 130px;
+  height: fit-content;
+  padding: 0.25rem;
+  border: 1px solid gray;
   position: absolute;
+  display: flex;
+  text-align: left;
   opacity: 0;
   overflow: hidden
 

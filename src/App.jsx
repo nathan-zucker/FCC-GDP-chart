@@ -5,23 +5,6 @@ import * as d3 from 'd3'
 
 export function App() {
 
-  //https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json
-  
-
-  function convertYearToDec(date) {
-    //takes string in format yyyy-mm-dd
-    let arr = date.split('-');
-    let y = parseInt(arr[0]);
-    let m = parseInt(arr[1]);
-    let d = parseInt(arr[2]);
-    
-    let year = y + ( (d + m * 30) / 365 );
-    
-    //returns a decimal in form yyyy.....
-    console.log(year)
-    return year
-  }
-
   useEffect(()=>{
     const req = new XMLHttpRequest();
     req.open("GET", "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json", true);
@@ -37,13 +20,12 @@ export function App() {
   },[])
 
   function mouseoverHandler(d) {
-    console.log(d.clientX, d.clientY)
     const dataPoint = d.toElement.__data__
     d3.select("#tooltip")
     .attr("data-date", dataPoint[0])
     .transition()
     .style("opacity", 1)
-    .text("DATE: "+dataPoint[0]+', GDP: '+dataPoint[1])
+    .text("DATE: "+dataPoint[0]+' GDP: '+dataPoint[1])
   }
   function mousemoveHandler(e) {
     d3.select("#tooltip")
@@ -51,7 +33,6 @@ export function App() {
       .style("left", e.clientX-170+"px")
   }
   function mouseoutHandler () {
-    console.log("mouse out")
     d3.select("#tooltip")
     .transition()
     .style("opacity", 0)
@@ -68,7 +49,7 @@ export function App() {
     const dataLength = json["data"].length
     const name = json["source_name"]
     const XYaxesLabels = json["column_names"]
-    const padding = 40
+    const padding = 60
     const rW = 2.5
     const w = (padding * 2) + (dataLength * rW)
     const h = 400
@@ -103,11 +84,7 @@ export function App() {
     .on("mouseover", mouseoverHandler)
     .on("mousemove", mousemoveHandler)
     .on("mouseout", mouseoutHandler)
-    //.append("title")
-    //.text((d)=>"DATE: "+d[0]+", GDP: "+d[1]+"")
-
-    console.log(parseInt(data[0][0]))
-
+    
     const xAxis = d3.axisBottom(xScale);
     svg.append("g")
     .attr("id", "x-axis")
@@ -123,7 +100,16 @@ export function App() {
     .attr("id", "y-axis")
     .attr("transform", "translate(" + padding + ",0)")
       .call(yAxis)
-
+    
+    svg.append("text")
+    .attr("fill", "whitesmoke")
+    .attr("class", "y-label")
+    .attr("text-anchor", "end")
+    .attr("height", "1rem")
+    .attr("x", - (h / 2 - padding))
+    .attr("y", "0.75rem")
+    .attr("transform", "rotate(-90)")
+    .text("GDP in Billions")
 
   }
 
